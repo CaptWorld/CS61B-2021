@@ -1,12 +1,6 @@
 package deque;
 
-import edu.princeton.cs.algs4.StdRandom;
-import org.junit.Test;
-
 import java.util.Iterator;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 public class ArrayDeque<T> implements Deque<T> {
 

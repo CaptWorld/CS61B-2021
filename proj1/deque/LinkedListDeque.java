@@ -4,18 +4,7 @@ import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Deque<T> {
 
-    private class Node {
-        public T _item;
-        public Node prev;
-        public Node next;
-
-        public Node(T item) {
-            _item = item;
-        }
-    }
-
     private final Node sentinel = new Node(null);
-
     /**
      * Invariants:
      * 1. The size variable always holds size of the list
@@ -24,9 +13,8 @@ public class LinkedListDeque<T> implements Deque<T> {
      * 4. The last node (if exists), is always at sentinel.prev
      */
 
-    private Node items;
+    private final Node items;
     private int size;
-
     public LinkedListDeque() {
         sentinel.prev = sentinel;
         sentinel.next = sentinel;
@@ -191,5 +179,15 @@ public class LinkedListDeque<T> implements Deque<T> {
                 return item;
             }
         };
+    }
+
+    private class Node {
+        public T _item;
+        public Node prev;
+        public Node next;
+
+        public Node(T item) {
+            _item = item;
+        }
     }
 }
