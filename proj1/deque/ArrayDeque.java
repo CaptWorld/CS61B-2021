@@ -166,7 +166,6 @@ public class ArrayDeque<T> implements Deque<T> {
      *
      * @return iterator to iterate through the deque
      */
-    @Override
     public Iterator<T> iterator() {
         return new Iterator<T>() {
 
