@@ -79,13 +79,11 @@ public class LinkedListDeque<T> implements Deque<T> {
      */
     @Override
     public void printDeque() {
-        int i = 0;
-        for (T item : this) {
+        for (int i = 0; i < size(); i++) {
             if (i != 0) {
                 System.out.print(' ');
             }
-            i++;
-            System.out.print(item);
+            System.out.print(get(i));
         }
         System.out.println();
     }

@@ -39,10 +39,8 @@ public class ArrayDeque<T> implements Deque<T> {
      */
     private void resize(int newSize) {
         T[] newItems = (T[]) new Object[newSize];
-        int i = 0;
-        for (T item : this) {
-            newItems[i] = item;
-            i++;
+        for (int i = 0; i < size(); i++) {
+            newItems[i] = get(i);
         }
         items = newItems;
         nextFirst = newSize - 1;
@@ -100,13 +98,11 @@ public class ArrayDeque<T> implements Deque<T> {
      */
     @Override
     public void printDeque() {
-        int i = 0;
-        for (T item : this) {
+        for (int i = 0; i < size(); i++) {
             if (i != 0) {
                 System.out.print(" ");
             }
-            i++;
-            System.out.print(item);
+            System.out.print(get(i));
         }
         System.out.println();
     }

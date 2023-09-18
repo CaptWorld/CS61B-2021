@@ -9,7 +9,7 @@ import java.util.Iterator;
  *
  * @param <T> type of items stored in the structure
  */
- public interface Deque<T> extends Iterable<T> {
+ public interface Deque<T> {
 
     /**
      * Adds item to the start of the deque.
@@ -74,7 +74,6 @@ import java.util.Iterator;
      *
      * @return iterator to iterate through the deque
      */
-    @Override
      Iterator<T> iterator();
 
     /**
