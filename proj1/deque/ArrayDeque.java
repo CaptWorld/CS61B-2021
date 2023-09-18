@@ -86,16 +86,6 @@ public class ArrayDeque<T> implements Deque<T> {
     }
 
     /**
-     * Checks if the deque is empty.
-     *
-     * @return true if deque is empty, false otherwise
-     */
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    /**
      * Provides size of the deque.
      *
      * @return the size of the deque

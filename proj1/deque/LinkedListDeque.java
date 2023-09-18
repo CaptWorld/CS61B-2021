@@ -65,16 +65,6 @@ public class LinkedListDeque<T> implements Deque<T> {
     }
 
     /**
-     * Checks if the deque is empty.
-     *
-     * @return true if deque is empty, false otherwise
-     */
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
-
-    /**
      * Provides size of the deque.
      *
      * @return the size of the deque
@@ -116,7 +106,7 @@ public class LinkedListDeque<T> implements Deque<T> {
         firstItem.next.prev = sentinel;
         size -= 1;
 
-        return  firstItem._item;
+        return firstItem._item;
     }
 
     /**

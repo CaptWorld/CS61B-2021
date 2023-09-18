@@ -30,7 +30,9 @@ import java.util.Iterator;
      *
      * @return true if deque is empty, false otherwise
      */
-     boolean isEmpty();
+     default boolean isEmpty() {
+         return size()  == 0;
+     }
 
     /**
      * Provides size of the deque.
