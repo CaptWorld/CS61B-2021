@@ -194,11 +194,19 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) return false;
-        if (this == obj) return true;
-        if (this.getClass() != obj.getClass()) return false;
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
         LinkedListDeque<T> castedObj = (LinkedListDeque<T>) obj;
-        if (size() != castedObj.size()) return false;
+        if (size() != castedObj.size()) {
+            return false;
+        }
         Node thisItemNode = sentinel.next;
         Node objItemNode = castedObj.sentinel.next;
         while (thisItemNode != sentinel && objItemNode != castedObj.sentinel) {

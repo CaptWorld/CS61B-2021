@@ -2,6 +2,8 @@ package deque;
 
 import java.util.Iterator;
 
+import static org.junit.Assert.assertEquals;
+
 public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     private static final double LOAD_FACTOR = 0.25;
@@ -45,11 +47,11 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (size == items.length) {
             resize(size * 2);
         }
-        items[nextFirst] = item;
-        nextFirst--;
         if (nextFirst == -1) {
             nextFirst = items.length - 1;
         }
+        items[nextFirst] = item;
+        nextFirst--;
         size++;
     }
 
@@ -63,11 +65,11 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (size == items.length) {
             resize(size * 2);
         }
-        items[nextLast] = item;
-        nextLast += 1;
         if (nextLast == items.length) {
             nextLast = 0;
         }
+        items[nextLast] = item;
+        nextLast += 1;
         size++;
     }
 
@@ -105,7 +107,8 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (size == 0) {
             return null;
         }
-        if (items.length >= MIN_SIZE_FOR_RESIZING && size == Math.round(LOAD_FACTOR * items.length)) {
+        if (items.length >= MIN_SIZE_FOR_RESIZING &&
+                size == Math.round(LOAD_FACTOR * items.length)) {
             resize((int) Math.round(LOAD_FACTOR * items.length));
         }
         nextFirst = nextFirst == items.length - 1 ? 0 : nextFirst + 1;
@@ -175,16 +178,56 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null) return false;
-        if (this == obj) return true;
-        if (this.getClass() != obj.getClass()) return false;
+        if (obj == null) {
+            return false;
+        }
+        if (this == obj) {
+            return true;
+        }
+        if (this.getClass() != obj.getClass()) {
+            return false;
+        }
         ArrayDeque<T> castedObj = (ArrayDeque<T>) obj;
-        if (size() != castedObj.size()) return false;
+        if (size() != castedObj.size()) {
+            return false;
+        }
         for (int i = 0; i < size(); i++) {
             if (!get(i).equals(castedObj.get(i))) {
                 return false;
             }
         }
         return true;
+    }
+
+    public static void main(String[] args) {
+        ArrayDeque<Integer> adq = new ArrayDeque<>();
+        LinkedListDeque<Integer> ldq = new LinkedListDeque<>();
+        int iterations = 50000;
+        for (int i = 0; i < iterations; i++) {
+            double prob = Math.random();
+            if (prob < 0.25) {
+                int random = (int) Math.round(Math.random() * iterations);
+                ldq.addFirst(random);
+                adq.addFirst(random);
+                System.out.println("AddFirst: " + random);
+                assertEquals(ldq.get(0), adq.get(0));
+            } else if (prob < 0.5) {
+                int random = (int) Math.round(Math.random() * iterations);
+                ldq.addLast(random);
+                adq.addLast(random);
+                System.out.println("AddLast: " + random);
+                assertEquals(ldq.get(ldq.size() - 1), adq.get(adq.size() - 1));
+            } else if (prob < 0.75) {
+                Integer expected = ldq.removeFirst();
+                Integer actual = adq.removeFirst();
+                System.out.println("removeFirst: " + expected + " " + actual);
+                assertEquals(expected, actual);
+            } else {
+                Integer expected = ldq.removeLast();
+                Integer actual = adq.removeLast();
+                System.out.println("removeLast: " + expected + " " + actual);
+                assertEquals(expected, actual);
+            }
+        }
     }
 }
