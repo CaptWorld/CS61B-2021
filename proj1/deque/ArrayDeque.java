@@ -2,13 +2,9 @@ package deque;
 
 import java.util.Iterator;
 
-import static org.junit.Assert.assertEquals;
-
 public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     private static final double LOAD_FACTOR = 0.25;
-
-    private static final int MIN_SIZE_FOR_RESIZING = 16;
 
     private T[] items;
     private int size;
@@ -107,8 +103,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (size == 0) {
             return null;
         }
-        if (items.length >= MIN_SIZE_FOR_RESIZING &&
-                size == Math.round(LOAD_FACTOR * items.length)) {
+        if (size == Math.round(LOAD_FACTOR * items.length)) {
             resize((int) Math.round(LOAD_FACTOR * items.length));
         }
         nextFirst = nextFirst == items.length - 1 ? 0 : nextFirst + 1;
@@ -128,7 +123,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (size == 0) {
             return null;
         }
-        if (items.length >= MIN_SIZE_FOR_RESIZING && size == Math.round(LOAD_FACTOR * items.length)) {
+        if (size == Math.round(LOAD_FACTOR * items.length)) {
             resize((int) Math.round(LOAD_FACTOR * items.length));
         }
         nextLast = nextLast == 0 ? items.length - 1 : nextLast - 1;
@@ -184,10 +179,10 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (this == obj) {
             return true;
         }
-        if (this.getClass() != obj.getClass()) {
+        if (!(obj instanceof Deque)) {
             return false;
         }
-        ArrayDeque<T> castedObj = (ArrayDeque<T>) obj;
+        Deque<T> castedObj = (Deque<T>) obj;
         if (size() != castedObj.size()) {
             return false;
         }

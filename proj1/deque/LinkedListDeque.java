@@ -200,21 +200,21 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         if (this == obj) {
             return true;
         }
-        if (this.getClass() != obj.getClass()) {
+        if (!(obj instanceof Deque)) {
             return false;
         }
-        LinkedListDeque<T> castedObj = (LinkedListDeque<T>) obj;
+        Deque<T> castedObj = (Deque<T>) obj;
         if (size() != castedObj.size()) {
             return false;
         }
         Node thisItemNode = sentinel.next;
-        Node objItemNode = castedObj.sentinel.next;
-        while (thisItemNode != sentinel && objItemNode != castedObj.sentinel) {
-            if (!thisItemNode._item.equals(objItemNode._item)) {
+        int i = 0;
+        while (thisItemNode != sentinel) {
+            if (!thisItemNode._item.equals(castedObj.get(i))) {
                 return false;
             }
             thisItemNode = thisItemNode.next;
-            objItemNode = objItemNode.next;
+            i++;
         }
         return true;
     }
