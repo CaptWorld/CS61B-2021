@@ -6,7 +6,7 @@ import java.util.Iterator;
  * Interface for Deque Data Structure
  *
  * @param <T> type of items stored in the structure
- * @see <a href="http://www.cplusplus.com/reference/deque/deque/">http://www.cplusplus.com/reference/deque/deque/</a>
+ * @see <a href="http://www.cplusplus.com/reference/deque/deque/">deque</a>
  */
 public interface Deque<T> {
 

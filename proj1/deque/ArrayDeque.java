@@ -2,9 +2,12 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<T> implements Deque<T> {
+public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     private static final double LOAD_FACTOR = 0.25;
+
+    private static final int MIN_SIZE_FOR_RESIZING = 16;
+
     private T[] items;
     private int size;
     private int nextFirst;
@@ -15,15 +18,6 @@ public class ArrayDeque<T> implements Deque<T> {
         size = 0;
         nextFirst = 4;
         nextLast = 5;
-    }
-
-    private static int getInitialNextFirst(int sizeOfArr) {
-        return sizeOfArr / 2;
-    }
-
-    private static int getInitialNextLast(int sizeOfArr) {
-
-        return sizeOfArr / 2 + 1;
     }
 
     /**
@@ -111,7 +105,7 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size == 0) {
             return null;
         }
-        if (size == Math.round(LOAD_FACTOR * items.length)) {
+        if (items.length >= MIN_SIZE_FOR_RESIZING && size == Math.round(LOAD_FACTOR * items.length)) {
             resize((int) Math.round(LOAD_FACTOR * items.length));
         }
         nextFirst = nextFirst == items.length - 1 ? 0 : nextFirst + 1;
@@ -131,7 +125,7 @@ public class ArrayDeque<T> implements Deque<T> {
         if (size == 0) {
             return null;
         }
-        if (size == Math.round(LOAD_FACTOR * items.length)) {
+        if (items.length >= MIN_SIZE_FOR_RESIZING && size == Math.round(LOAD_FACTOR * items.length)) {
             resize((int) Math.round(LOAD_FACTOR * items.length));
         }
         nextLast = nextLast == 0 ? items.length - 1 : nextLast - 1;
@@ -177,5 +171,20 @@ public class ArrayDeque<T> implements Deque<T> {
                 return item;
             }
         };
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) return false;
+        if (this == obj) return true;
+        if (this.getClass() != obj.getClass()) return false;
+        ArrayDeque<T> castedObj = (ArrayDeque<T>) obj;
+        if (size() != castedObj.size()) return false;
+        for (int i = 0; i < size(); i++) {
+            if (!get(i).equals(castedObj.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 }
