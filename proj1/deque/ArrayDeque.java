@@ -198,36 +198,4 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         }
         return true;
     }
-
-    public static void main(String[] args) {
-        ArrayDeque<Integer> adq = new ArrayDeque<>();
-        LinkedListDeque<Integer> ldq = new LinkedListDeque<>();
-        int iterations = 50000;
-        for (int i = 0; i < iterations; i++) {
-            double prob = Math.random();
-            if (prob < 0.25) {
-                int random = (int) Math.round(Math.random() * iterations);
-                ldq.addFirst(random);
-                adq.addFirst(random);
-                System.out.println("AddFirst: " + random);
-                assertEquals(ldq.get(0), adq.get(0));
-            } else if (prob < 0.5) {
-                int random = (int) Math.round(Math.random() * iterations);
-                ldq.addLast(random);
-                adq.addLast(random);
-                System.out.println("AddLast: " + random);
-                assertEquals(ldq.get(ldq.size() - 1), adq.get(adq.size() - 1));
-            } else if (prob < 0.75) {
-                Integer expected = ldq.removeFirst();
-                Integer actual = adq.removeFirst();
-                System.out.println("removeFirst: " + expected + " " + actual);
-                assertEquals(expected, actual);
-            } else {
-                Integer expected = ldq.removeLast();
-                Integer actual = adq.removeLast();
-                System.out.println("removeLast: " + expected + " " + actual);
-                assertEquals(expected, actual);
-            }
-        }
-    }
 }
