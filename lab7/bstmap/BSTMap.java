@@ -44,7 +44,7 @@ public class BSTMap<K extends Comparable<K>, V> implements Map61B<K, V> {
             return null;
         }
         return switch (node.key.compareTo(key)) {
-            case 0 -> node.value;
+            case 0 -> node;
             case 1 -> get(node.left, key);
             default -> get(node.right, key);
         };
